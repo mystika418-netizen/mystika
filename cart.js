@@ -259,47 +259,39 @@ function checkout() {
         return;
     }
     
-    // Afficher l'animation de chargement
     showNotification('Préparation de votre commande...', 'info');
-    
-    // Générer les détails de la commande
     const orderDetails = generateOrderDetails();
     const orderReference = `CMD-${Date.now().toString().slice(-6)}`;
-    
-    // Préparer l'email
     const subject = `💎 Commande Mystica #${orderReference}`;
     const body = orderDetails;
-    
-    // Encoder pour l'URL
     const encodedSubject = encodeURIComponent(subject);
     const encodedBody = encodeURIComponent(body);
-    
-    // URL Gmail
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=mystika418@gmail.com&su=${encodedSubject}&body=${encodedBody}`;
-    
-    // Ouvrir Gmail dans un nouvel onglet
-    const newWindow = window.open(gmailUrl, '_blank');
-    
-    // Vérifier si la fenêtre s'est ouverte
-    if (newWindow) {
-        // Vider le panier après l'envoi
-        setTimeout(() => {
-            saveCart([]);
-            updateCartCount();
-            showNotification('Votre commande a été préparée! Veuillez envoyer l\'email.', 'success');
-        }, 2000);
+
+    // Détection mobile simple
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        // Utiliser mailto sur mobile
+        const mailtoUrl = `mailto:mystika418@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+        window.location.href = mailtoUrl;
     } else {
-        // Fallback: utiliser mailto si les popups sont bloqués
-        showNotification('Ouvrez manuellement votre Gmail et copiez le texte ci-dessous', 'info');
-        
-        // Afficher le texte à copier
-        const emailContentElement = document.getElementById('emailContent');
-        const emailTemplateElement = document.getElementById('emailTemplate');
-        
-        if (emailContentElement && emailTemplateElement) {
-            emailContentElement.style.display = 'block';
-            // Affiche le résumé stylé en HTML
-            emailTemplateElement.innerHTML = generateOrderDetailsHTML();
+        // Utiliser Gmail sur desktop
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=mystika418@gmail.com&su=${encodedSubject}&body=${encodedBody}`;
+        const newWindow = window.open(gmailUrl, '_blank');
+        if (newWindow) {
+            setTimeout(() => {
+                saveCart([]);
+                updateCartCount();
+                showNotification('Votre commande a été préparée! Veuillez envoyer l\'email.', 'success');
+            }, 2000);
+        } else {
+            showNotification('Ouvrez manuellement votre Gmail et copiez le texte ci-dessous', 'info');
+            const emailContentElement = document.getElementById('emailContent');
+            const emailTemplateElement = document.getElementById('emailTemplate');
+            if (emailContentElement && emailTemplateElement) {
+                emailContentElement.style.display = 'block';
+                emailTemplateElement.innerHTML = generateOrderDetailsHTML();
+            }
         }
     }
 }
