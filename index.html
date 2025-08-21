@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystica - Boutique Ésotérique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-crystal"></i>
+                Mystica
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="produits.html"><i class="fas fa-gem"></i> Produits</a></li>
+        
+                    <li>
+                        <a href="panier.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i> Panier
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </li>
+                    <li><a href="#" onclick="openAuth()"><i class="fas fa-user"></i> Compte</a></li>
+                    <li><a href="admin.html"><i class="fas fa-lock"></i> Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Bienvenue dans l'univers Mystica</h1>
+            <p>Découvrez notre collection exclusive de pierres énergétiques, tarots, encens et accessoires ésotériques pour harmoniser votre esprit et votre environnement.</p>
+            <a href="produits.html" class="btn">Explorer la boutique</a>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="container">
+        <h2 class="section-title">Nos Catégories</h2>
+        <div class="categories">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3>Pierres & Cristaux</h3>
+                <p>Des minéraux naturels aux propriétés énergétiques uniques pour équilibrer votre esprit.</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <h3>Tarots & Oracles</h3>
+                <p>Jeux de cartes divinatoires pour éclairer votre chemin et développer votre intuition.</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h3>Encens & Sauges</h3>
+                <p>Purifiez votre espace avec nos encens naturels et bâtons de sauge de haute qualité.</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Livres & Guides</h3>
+                <p>Apprenez et approfondissez vos connaissances avec notre sélection d'ouvrages spécialisés.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="container" id="products">
+        <h2 class="section-title">Nos Produits Phares</h2>
+        <div class="products" id="featuredProducts">
+            <!-- Produits en vedette chargés dynamiquement -->
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="produits.html" class="btn">Voir tous les produits</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mystica</h3>
+                    <p>Votre boutique ésotérique en ligne pour tous vos besoins spirituels et énergétiques.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Rue des Étoiles, 75000 Paris</p>
+                    <p><i class="fas fa-phone"></i> +33 7 56 91 69 28</p>
+                    <p><i class="fas fa-envelope"></i> mystika418@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="produits.html"><i class="fas fa-chevron-right"></i> Produits</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> À propos</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Restez Connecté</h3>
+                    <p>Inscrivez-vous à notre newsletter pour recevoir nos actualités et offres spéciales.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Votre email">
+                        </div>
+                        <button type="submit" class="btn">S'inscrire</button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mystica - Tous droits réservés | Site créé avec <i class="fas fa-heart" style="color: #d4af37;"></i> pour la communauté ésotérique</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('authModal')">&times;</button>
+            <h2 class="modal-title">Connexion / Inscription</h2>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">Connexion</div>
+                <div class="auth-tab" onclick="switchAuthTab('register')">Inscription</div>
+            </div>
+            
+            <div class="auth-form active" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="email@exemple.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe:</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Votre mot de passe">
+                </div>
+                
+                <button class="btn" onclick="login()">Se connecter</button>
+            </div>
+            
+            <div class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="registerFirstName">Prénom:</label>
+                    <input type="text" id="registerFirstName" class="form-control" placeholder="Votre prénom">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerLastName">Nom:</label>
+                    <input type="text" id="registerLastName" class="form-control" placeholder="Votre nom">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" class="form-control" placeholder="email@exemple.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Mot de passe:</label>
+                    <input type="password" id="registerPassword" class="form-control" placeholder="Créez un mot de passe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmer le mot de passe:</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" placeholder="Confirmez votre mot de passe">
+                </div>
+                
+                <button class="btn" onclick="register()">Créer un compte</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-info-circle"></i>
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="auth.js"></script>
+    <script src="cart.js"></script>
+    <script src="products.js"></script>
+    <script>
+        // Charger les produits en vedette
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeData();
+            loadFeaturedProducts();
+            
+            // Vérifier si l'utilisateur est connecté
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                showNotification(`Bon retour ${currentUser.firstName} !`, 'success');
+            }
+        });
+
+        // Charger les produits en vedette
+        function loadFeaturedProducts() {
+            const products = getProducts();
+            const featuredContainer = document.getElementById('featuredProducts');
+            
+            // Afficher seulement 4 produits sur la page d'accueil
+            const featuredProducts = products.slice(0, 4);
+            
+            if (featuredProducts.length === 0) {
+                featuredContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 2rem;">Aucun produit disponible</p>';
+                return;
+            }
+            
+            // Afficher les produits
+            featuredProducts.forEach(product => {
+                const stockStatus = product.stock > 5 ? 'in-stock' : (product.stock > 0 ? 'low-stock' : 'out-of-stock');
+                const stockText = product.stock > 5 ? 'En stock' : (product.stock > 0 ? 'Stock faible' : 'Rupture de stock');
+                const stockIcon = product.stock > 5 ? 'fa-check-circle' : (product.stock > 0 ? 'fa-exclamation-circle' : 'fa-times-circle');
+                
+                const productElement = document.createElement('div');
+                productElement.className = 'product-card';
+                productElement.innerHTML = `
+                    <div class="product-image" style="background-image: url('${product.image}');">
+                        ${product.stock === 0 ? '<span class="product-badge badge-sale">Rupture</span>' : 
+                          product.stock < 5 ? '<span class="product-badge badge-popular">Populaire</span>' : 
+                          '<span class="product-badge badge-new">Nouveau</span>'}
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">
+                            <span>${product.price.toFixed(2)} €</span>
+                            <button class="btn" onclick="addToCart('${product.id}')" ${product.stock === 0 ? 'disabled' : ''}>
+                                ${product.stock === 0 ? 'Indisponible' : 'Ajouter'}
+                            </button>
+                        </div>
+                        <p class="product-stock ${stockStatus}"><i class="fas ${stockIcon}"></i> ${stockText}</p>
+                    </div>
+                `;
+                
+                featuredContainer.appendChild(productElement);
+            });
+        }
+    </script>
+</body>
+</html>

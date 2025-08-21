@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - Mystica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #0f0f14;
+            --gold: #d4af37;
+            --deep-purple: #6a0dad;
+            --light-purple: #8a4fff;
+            --text-light: #f0e6d2;
+            --card-bg: #1e1e28;
+            --header-height: 80px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding-top: var(--header-height);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(106, 13, 173, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 40%);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 15, 20, 0.95);
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--gold);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        nav ul li a i {
+            margin-right: 0.5rem;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--gold);
+            color: var(--dark-bg);
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        /* Cart Section */
+        .cart-page {
+            min-height: 60vh;
+            padding: 2rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0.5rem auto;
+        }
+
+        .cart-items {
+            margin: 1.8rem 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+            background: var(--card-bg);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--gold);
+        }
+
+        .cart-item-price {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin: 0 1.5rem;
+        }
+
+        .quantity-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-light);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background: var(--gold);
+            color: var(--dark-bg);
+        }
+
+        .quantity-value {
+            margin: 0 0.8rem;
+            min-width: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .cart-item-total {
+            font-weight: bold;
+            color: var(--gold);
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #f44336;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            transition: var(--transition);
+        }
+
+        .cart-item-remove:hover {
+            transform: scale(1.2);
+        }
+
+        .cart-total {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: right;
+            margin: 2rem 0;
+            color: var(--gold);
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+        }
+
+        .checkout-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border: 1px solid var(--gold);
+        }
+
+        .checkout-title {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--gold);
+        }
+
+        .checkout-info {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-info ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .checkout-info li {
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, #b8941f 100%);
+            color: var(--dark-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--dark-bg);
+        }
+
+        .email-content {
+            display: none;
+            background: white;
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--gold);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification i {
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .notification.success {
+            border-left-color: #4caf50;
+        }
+
+        .notification.error {
+            border-left-color: #f44336;
+        }
+
+        .notification.info {
+            border-left-color: #2196f3;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--deep-purple) 0%, #4a0072 100%);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 2px solid var(--gold);
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            color: #e6e6e6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #e6e6e6;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .cart-item-quantity {
+                margin: 1rem 0;
+            }
+            
+            .cart-item-total {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-crystal"></i>
+                Mystica
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="produits.html"><i class="fas fa-gem"></i> Produits</a></li>
+                    <li>
+                        <a href="panier.html" class="cart-icon active">
+                            <i class="fas fa-shopping-cart"></i> Panier
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </li>
+                    <li><a href="#" onclick="openAuth()"><i class="fas fa-user"></i> Compte</a></li>
+                    <li><a href="admin.html"><i class="fas fa-lock"></i> Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="container cart-page">
+        <h2 class="section-title">Votre Panier</h2>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Articles du panier chargés dynamiquement -->
+        </div>
+        
+        <div class="cart-total" id="cartTotal">
+            Total: 0,00 €
+        </div>
+        
+        <div class="checkout-section">
+            <h3 class="checkout-title">💎 Finaliser votre commande</h3>
+            
+            <div class="checkout-info">
+                <p>En cliquant sur "Passer la commande", votre Gmail s'ouvrira automatiquement avec :</p>
+                <ul>
+                    <li>📋 Le détail complet de vos articles</li>
+                    <li>💰 Le total de votre commande</li>
+                    <li>📧 Un message pré-rédigé à envoyer à mystika418@gmail.com</li>
+                    <li>🚚 Les instructions de livraison et paiement</li>
+                </ul>
+                <p><strong>Il ne vous restera plus qu'à cliquer sur "Envoyer" !</strong></p>
+            </div>
+            
+            <button class="btn" onclick="checkout()">
+                <i class="fas fa-paper-plane"></i> Passer la commande
+            </button>
+        </div>
+        
+        <div id="emailContent" class="email-content">
+            <pre id="emailTemplate"></pre>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="produits.html" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Continuer vos achats
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mystica</h3>
+                    <p>Votre boutique ésotérique en ligne pour tous vos besoins spirituels et énergétiques.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Rue des Étoiles, 75000 Paris</p>
+                    <p><i class="fas fa-phone"></i> +33 7 56 91 69 28</p>
+                    <p><i class="fas fa-envelope"></i> mystika418@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="produits.html"><i class="fas fa-chevron-right"></i> Produits</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> À propos</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Restez Connecté</h3>
+                    <p>Inscrivez-vous à notre newsletter pour recevoir nos actualités et offres spéciales.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Votre email">
+                        </div>
+                        <button type="submit" class="btn">S'inscrire</button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mystica - Tous droits réservés | Site créé avec <i class="fas fa-heart" style="color: #d4af37;"></i> pour la communauté ésotérique</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-info-circle"></i>
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="auth.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        // Charger le panier
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeData();
+            updateCartDisplay();
+        });
+
+        // Fonction pour ouvrir l'authentification
+        function openAuth() {
+            // Votre code d'authentification ici
+            alert("Fonctionnalité de connexion");
+        }
+    </script>
+</body>
+</html>

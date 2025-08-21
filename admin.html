@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Mystica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-crystal"></i>
+                Mystica
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="produits.html"><i class="fas fa-gem"></i> Produits</a></li>
+                    
+                    <li>
+                        <a href="panier.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i> Panier
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </li>
+                    <li><a href="#" onclick="openAuth()"><i class="fas fa-user"></i> Compte</a></li>
+                    <li><a href="admin.html" class="active"><i class="fas fa-lock"></i> Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Admin Auth Modal -->
+    <div class="modal" id="adminAuthModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('adminAuthModal')">&times;</button>
+            <h2 class="modal-title">Accès Administrateur</h2>
+            
+            <div class="form-group">
+                <label for="adminPassword">Mot de passe:</label>
+                <input type="password" id="adminPassword" class="form-control" placeholder="Entrez le mot de passe administrateur">
+            </div>
+            
+            <button class="btn" onclick="authenticateAdmin()">Se connecter</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <section class="container admin-page">
+        <div class="admin-panel" id="adminPanel">
+            <h2 class="section-title">Espace Administrateur</h2>
+            
+            <div class="admin-section">
+                <h3>Ajouter un Produit</h3>
+                <div class="admin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productName">Nom du produit:</label>
+                            <input type="text" id="productName" class="form-control" placeholder="Nom du produit">
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Prix (€):</label>
+                            <input type="number" id="productPrice" class="form-control" placeholder="Prix" step="0.01" min="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productCategory">Catégorie:</label>
+                            <select id="productCategory" class="form-control">
+                                <option value="pierres">Pierres & Cristaux</option>
+                                <option value="tarots">Tarots & Oracles</option>
+                                <option value="encens">Encens & Sauges</option>
+                                <option value="livres">Livres & Guides</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productStock">Stock:</label>
+                            <input type="number" id="productStock" class="form-control" placeholder="Quantité en stock" min="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productImage">Image du produit:</label>
+                        <div class="image-preview" id="imagePreview">
+                            <div class="image-preview-placeholder">Aperçu de l'image</div>
+                        </div>
+                        <div class="file-upload">
+                            <div class="file-upload-button">
+                                <i class="fas fa-upload"></i> Choisir une image
+                                <input type="file" id="productImage" class="file-upload-input" accept="image/*" onchange="previewImage(this)">
+                            </div>
+                            <span class="file-upload-name" id="fileName">Aucun fichier choisi</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productDescription">Description:</label>
+                        <textarea id="productDescription" class="form-control" placeholder="Description du produit"></textarea>
+                    </div>
+                    
+                    <button class="btn" onclick="addProduct()">Ajouter le produit</button>
+                </div>
+            </div>
+            
+            <div class="admin-section">
+                <h3>Produits Existants</h3>
+                <div class="admin-products-grid" id="adminProductsContainer">
+                    <!-- Produits admin chargés dynamiquement -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mystica</h3>
+                    <p>Votre boutique ésotérique en ligne pour tous vos besoins spirituels et énergétiques.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Rue des Étoiles, 75000 Paris</p>
+                    <p><i class="fas fa-phone"></i> +33 7 56 91 69 28</p>
+                    <p><i class="fas fa-envelope"></i> mystika418@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="produits.html"><i class="fas fa-chevron-right"></i> Produits</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> À propos</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Restez Connecté</h3>
+                    <p>Inscrivez-vous à notre newsletter pour recevoir nos actualités et offres spéciales.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Votre email">
+                        </div>
+                        <button type="submit" class="btn">S'inscrire</button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mystica - Tous droits réservés | Site créé avec <i class="fas fa-heart" style="color: #d4af37;"></i> pour la communauté ésotérique</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('authModal')">&times;</button>
+            <h2 class="modal-title">Connexion / Inscription</h2>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">Connexion</div>
+                <div class="auth-tab" onclick="switchAuthTab('register')">Inscription</div>
+            </div>
+            
+            <div class="auth-form active" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="email@exemple.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe:</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Votre mot de passe">
+                </div>
+                
+                <button class="btn" onclick="login()">Se connecter</button>
+            </div>
+            
+            <div class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="registerFirstName">Prénom:</label>
+                    <input type="text" id="registerFirstName" class="form-control" placeholder="Votre prénom">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerLastName">Nom:</label>
+                    <input type="text" id="registerLastName" class="form-control" placeholder="Votre nom">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" class="form-control" placeholder="email@exemple.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Mot de passe:</label>
+                    <input type="password" id="registerPassword" class="form-control" placeholder="Créez un mot de passe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmer le mot de passe:</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" placeholder="Confirmez votre mot de passe">
+                </div>
+                
+                <button class="btn" onclick="register()">Créer un compte</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-info-circle"></i>
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="auth.js"></script>
+    <script src="products.js"></script>
+    <script>
+        // Protection stricte de la page admin
+        let adminAccess = false;
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeData();
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                window.location.href = 'index.html';
+                return;
+            }
+            // Afficher la modale d'authentification admin
+            document.getElementById('adminAuthModal').style.display = 'flex';
+            document.getElementById('adminPanel').style.display = 'none';
+        });
+
+        function authenticateAdmin() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'julus123') {
+                adminAccess = true;
+                closeModal('adminAuthModal');
+                document.getElementById('adminPanel').style.display = 'block';
+                loadAdminProducts();
+                showNotification('Accès administrateur autorisé', 'success');
+            } else {
+                showNotification('Mot de passe incorrect', 'error');
+            }
+        }
+
+        // Empêche toute interaction avec la page si non admin
+        document.addEventListener('click', function(e) {
+            if (!adminAccess && document.getElementById('adminAuthModal').style.display !== 'none') {
+                if (!document.getElementById('adminAuthModal').contains(e.target)) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            }
+        }, true);
+    </script>
+</body>
+</html>

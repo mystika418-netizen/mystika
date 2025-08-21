@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produits - Mystica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-crystal"></i>
+                Mystica
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="produits.html" class="active"><i class="fas fa-gem"></i> Produits</a></li>
+                    
+                    <li>
+                        <a href="panier.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i> Panier
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </li>
+                    <li><a href="#" onclick="openAuth()"><i class="fas fa-user"></i> Compte</a></li>
+                    <li><a href="admin.html"><i class="fas fa-lock"></i> Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <section class="container">
+        <h2 class="section-title">Tous nos Produits</h2>
+        
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <label for="categoryFilter">Catégorie:</label>
+                <select id="categoryFilter" onchange="filterProducts()">
+                    <option value="all">Toutes les catégories</option>
+                    <option value="pierres">Pierres & Cristaux</option>
+                    <option value="tarots">Tarots & Oracles</option>
+                    <option value="encens">Encens & Sauges</option>
+                    <option value="livres">Livres & Guides</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="products" id="productsContainer">
+            <!-- Les produits seront affichés ici avec image -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mystica</h3>
+                    <p>Votre boutique ésotérique en ligne pour tous vos besoins spirituels et énergétiques.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Rue des Étoiles, 75000 Paris</p>
+                    <p><i class="fas fa-phone"></i> +33 7 56 91 69 28</p>
+                    <p><i class="fas fa-envelope"></i> mystika418@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="produits.html"><i class="fas fa-chevron-right"></i> Produits</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> À propos</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Restez Connecté</h3>
+                    <p>Inscrivez-vous à notre newsletter pour recevoir nos actualités et offres spéciales.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Votre email">
+                        </div>
+                        <button type="submit" class="btn">S'inscrire</button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mystica - Tous droits réservés | Site créé avec <i class="fas fa-heart" style="color: #d4af37;"></i> pour la communauté ésotérique</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('authModal')">&times;</button>
+            <h2 class="modal-title">Connexion / Inscription</h2>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">Connexion</div>
+                <div class="auth-tab" onclick="switchAuthTab('register')">Inscription</div>
+            </div>
+            
+            <div class="auth-form active" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="email@exemple.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe:</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Votre mot de passe">
+                </div>
+                
+                <button class="btn" onclick="login()">Se connecter</button>
+            </div>
+            
+            <div class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="registerFirstName">Prénom:</label>
+                    <input type="text" id="registerFirstName" class="form-control" placeholder="Votre prénom">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerLastName">Nom:</label>
+                    <input type="text" id="registerLastName" class="form-control" placeholder="Votre nom">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" class="form-control" placeholder="email@exemple.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Mot de passe:</label>
+                    <input type="password" id="registerPassword" class="form-control" placeholder="Créez un mot de passe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmer le mot de passe:</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" placeholder="Confirmez votre mot de passe">
+                </div>
+                
+                <button class="btn" onclick="register()">Créer un compte</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-info-circle"></i>
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="auth.js"></script>
+    <script src="cart.js"></script>
+    <script src="products.js"></script>
+    <script>
+        // Charger les produits
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeData();
+            loadProducts();
+        });
+    </script>
+</body>
+</html>
